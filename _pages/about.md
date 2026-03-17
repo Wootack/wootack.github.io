@@ -16,7 +16,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Hello, my name is Wootack Kim, 
+Hello, my name is Wootack Kim,
 I am a Ph.D student in Computer Science Engineering at Seoul National University, under supervision of professor [Youngki Lee](http://youngkilee.blogspot.com) in the [Human-Centered Computer Systems Lab](https://hcs.snu.ac.kr).
 
 My research interest includes mobile computing, augmented reality, and on-device DNN execution.
