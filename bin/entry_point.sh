@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
+export RUBY_SSL_CRL_CHECK_MODE=0
 echo "Entry point script running"
 
 CONFIG_FILE=_config.yml
@@ -18,12 +19,23 @@ manage_gemfile_lock() {
         fi
     fi
 }
-
+cleanup() {
+    echo "Cleaning up any existing Jekyll processes..."
+    # Find pids for 'jekyll serve', ignore failure if none found
+    pids=$(pgrep -f "jekyll serve" || true)
+    if [ -n "$pids" ]; then
+        echo "Killing pids: $pids"
+        kill -9 $pids
+        # Wait a moment for ports to be released
+        sleep 2
+    fi
+}
 start_jekyll() {
     manage_gemfile_lock
     bundle exec jekyll serve --watch --port=8080 --host=0.0.0.0 --livereload --verbose --trace --force_polling &
 }
 
+cleanup
 start_jekyll
 
 while true; do
